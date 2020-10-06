@@ -1,13 +1,15 @@
 import React, {useState} from "react";
 
 const EditTodo = ({todo}) => {
+//TODO fix event listener for clicking elsewhere to close modal and reset description -- see example from custom select window click
+
   const [description, setDescription] = useState(todo.description);
 
   const updateDescription = async(e) => {
     e.preventDefault();
     try {
       const body = {description};
-      const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`,{
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/todos/${todo.todo_id}`,{
         method: 'PUT',
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(body)

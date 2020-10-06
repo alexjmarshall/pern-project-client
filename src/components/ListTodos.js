@@ -6,7 +6,7 @@ const ListTodos = () => {
 
   const deleteTodo = async id => {
     try {
-      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+      const deleteTodo = await fetch(`${process.env.REACT_APP_API_HOST}/todos/${id}`, {
         method: "Delete",
       });
       console.log(await deleteTodo.json());
@@ -18,7 +18,7 @@ const ListTodos = () => {
 
   const getTodos = async () => {
     try {
-      const response = await fetch('http://localhost:5000/todos');
+      const response = await fetch(`${process.env.REACT_APP_API_HOST}/todos`);
       const jsonData = await response.json();
       setTodos(jsonData);
     } catch (err) {
