@@ -3,6 +3,17 @@ import React, {Fragment, useEffect, useState} from "react";
 const ListTodos = () => {
   const [todos, setTodos] = useState([]);
 
+  const deleteTodo = async id => {
+    try {
+      const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+        method: "Delete",
+      });
+      console.log(await deleteTodo.json());
+      setTodos(todos.filter(todo => todo.todo_id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
 
   const getTodos = async () => {
     try {
@@ -34,7 +45,7 @@ const ListTodos = () => {
             <tr key={todo.todo_id}>
               <td>{todo.description}</td>
               <td>Edit</td>
-              <td></td>
+              <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>Delete</button></td>
             </tr>
           ))}
           {/*
