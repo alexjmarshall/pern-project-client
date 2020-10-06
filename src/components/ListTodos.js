@@ -20,6 +20,7 @@ const ListTodos = () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_HOST}/todos`);
       const jsonData = await response.json();
+      jsonData.sort((a,b) => a.todo_id - b.todo_id);
       setTodos(jsonData);
     } catch (err) {
       console.error(err.message);
@@ -48,12 +49,6 @@ const ListTodos = () => {
               <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>Delete</button></td>
             </tr>
           ))}
-          {/*
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-          </tr> */}
         </tbody>
       </table>
     </>
